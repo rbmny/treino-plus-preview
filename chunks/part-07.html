@@ -1,4 +1,120 @@
-       const bg = p.style ? ' style="' + p.style + '"' : '';
+        '<button class="day-card" onclick="toast(\'Dia 1 · volta\')">' +
+          '<div class="day-num tone-g">3<small>Fim</small></div>' +
+          '<div><strong>Caminhada 5 min</strong><span>Volta à calma</span></div></button>';
+
+      const w10 = document.getElementById('run-10k-weeks');
+      if (w10) w10.innerHTML =
+        '<button class="week-chip on" onclick="toast(\'Fase Base\')"><b>1–4</b><span>Base</span></button>' +
+        '<button class="week-chip" onclick="toast(\'Fase Construção\')"><b>5–8</b><span>Construção</span></button>' +
+        '<button class="week-chip" onclick="toast(\'Fase Específico\')"><b>9–12</b><span>Específico</span></button>';
+
+      const d10 = document.getElementById('run-10k-days');
+      if (d10) d10.innerHTML =
+        '<button class="day-card" onclick="toast(\'Base aeróbica\')">' +
+          '<div class="day-num tone-run10">1<small>Fase</small></div>' +
+          '<div><strong>Semanas 1–4 · Base aeróbica</strong><span>Intervalos curtos</span></div></button>' +
+        '<button class="day-card" onclick="toast(\'Construção\')">' +
+          '<div class="day-num tone-d">2<small>Fase</small></div>' +
+          '<div><strong>Semanas 5–8 · Construção</strong><span>Corridas de 5–7 km</span></div></button>' +
+        '<button class="day-card" onclick="toast(\'Específico 10 km\')">' +
+          '<div class="day-num tone-h">3<small>Fase</small></div>' +
+          '<div><strong>Semanas 9–12 · Específico 10 km</strong><span>Longões e ritmo de prova</span></div></button>';
+    }
+
+    function buildAdaptacoes() {
+      const hub = document.getElementById('adapt-hub-grid');
+      if (hub) {
+        const map = [
+          { id: 'lipedema', go: 'adapt-lipedema', svg: Illustrations.adaptLipedema, tone: 'tone-run5' },
+          { id: 'gravida', go: 'adapt-gravida', svg: Illustrations.adaptGravida, tone: 'tone-f' },
+          { id: 'joelho', go: 'adapt-joelho', svg: Illustrations.adaptJoelho, tone: 'tone-i' },
+          { id: 'coluna', go: 'adapt-coluna', svg: Illustrations.adaptColuna, tone: 'tone-d' }
+        ];
+        hub.innerHTML = map.map(a => {
+          const meta = Illustrations.ADAPT[a.id];
+          return '<button class="adapt-tile" onclick="go(\'' + a.go + '\')">' +
+            '<div class="adapt-visual ' + a.tone + '">' + a.svg() + '</div>' +
+            '<div class="label"><strong>' + meta.label + '</strong><span>' + meta.sub + '</span></div></button>';
+        }).join('');
+      }
+
+      const heroes = [
+        ['adapt-hero-lipedema', Illustrations.adaptLipedema],
+        ['adapt-hero-gravida', Illustrations.adaptGravida],
+        ['adapt-hero-joelho', Illustrations.adaptJoelho],
+        ['adapt-hero-coluna', Illustrations.adaptColuna]
+      ];
+      heroes.forEach(([id, fn]) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = fn();
+      });
+
+      const contents = {
+        'adapt-content-lipedema': [
+          { part: 'pernas', t: 'Caminhada aquática / elíptico', m: 'Cardio sem compressão' },
+          { part: 'gluteo', t: 'Força com bandas', m: 'Glúteos e pernas' },
+          { part: 'core', t: 'Mobilidade e respiração', m: 'Alívio e consciência' }
+        ],
+        'adapt-content-gravida': [
+          { part: 'full', t: '1º trimestre', m: 'Manutenção · volume leve' },
+          { part: 'core', t: '2º trimestre', m: 'Força adaptada' },
+          { part: 'gluteo', t: '3º trimestre', m: 'Mobilidade e caminhada' }
+        ],
+        'adapt-content-joelho': [
+          { part: 'gluteo', t: 'Ativação de glúteo médio', m: 'Alinhamento do joelho' },
+          { part: 'pernas', t: 'Agachamento em caixa', m: 'Amplitude controlada' },
+          { part: 'full', t: 'Bike / elíptico', m: 'Cardio sem impacto' }
+        ],
+        'adapt-content-coluna': [
+          { part: 'core', t: 'Bird-dog · dead bug', m: 'Core anti-extensão' },
+          { part: 'costas', t: 'Mobilidade torácica', m: 'Alongamentos diários' },
+          { part: 'full', t: 'Caminhada postural', m: 'Volume leve' }
+        ]
+      };
+      Object.entries(contents).forEach(([id, items]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = items.map(w => {
+          const m = BodySilhouette.META[w.part];
+          return '<button class="workout-card" onclick="toast(\'Abrindo: ' + w.t.replace(/'/g, "\\'") + '\')">' +
+            '<div class="workout-thumb tone-' + m.tone + '">' + sil(w.part) + PLAY + '</div>' +
+            '<div class="workout-info"><strong>' + w.t + '</strong><span>' + w.m + '</span></div></button>';
+        }).join('');
+      });
+    }
+
+    function buildEbook() {
+      const el = document.getElementById('ebook-chapters');
+      if (!el) return;
+      const chapters = [
+        { n: '01', t: 'Fundamentos', m: 'Energia, macros e timing' },
+        { n: '02', t: 'Proteína no dia a dia', m: 'Metas práticas · 6 pág.' },
+        { n: '03', t: 'Carboidratos e treino', m: 'Pré e pós-treino' },
+        { n: '04', t: 'Gorduras e hormônios', m: 'Qualidade e quantidades' },
+        { n: '05', t: 'Hidratação', m: 'Eletrólitos e volume' },
+        { n: '06', t: 'Refeições modelo', m: 'Cardápios da semana' },
+        { n: '07', t: 'Suplementos', m: 'O que vale a pena' }
+      ];
+      el.innerHTML = chapters.map(c =>
+        '<button class="chapter-card" onclick="toast(\'Capítulo ' + c.n + ': ' + c.t + '\')">' +
+          '<div class="chapter-num">' + c.n + '</div>' +
+          '<div><strong>' + c.t + '</strong><span>' + c.m + '</span></div></button>'
+      ).join('');
+    }
+
+    function buildLoja() {
+      const el = document.getElementById('shop-grid');
+      if (!el) return;
+      const products = [
+        { t: 'Kit Home Gym', sub: 'Halteres e acessórios', price: 'R$ 189', art: Illustrations.shopDumbbell(), tone: 'tone-a', click: "toast('Kit Home Gym adicionado (demo)')" },
+        { t: 'Ebook Nutrição', sub: '48 páginas', price: 'R$ 47', art: Illustrations.bookMark(), tone: '', style: 'background:linear-gradient(165deg,#1A3A2A,#52B788)', click: "go('ebook')" },
+        { t: 'Faixas elásticas', sub: '3 densidades', price: 'R$ 79', art: Illustrations.shopBands(), tone: 'tone-f', click: "toast('Kit faixas elásticas (demo)')" },
+        { t: 'Plano Anual', sub: 'Acesso completo', price: 'R$ 397', art: Illustrations.shopLock(), tone: 'tone-h', click: "toast('Plano Anual Treino+ (demo)')" },
+        { t: 'Método Glúteo', sub: '12 treinos digitais', price: 'R$ 97', art: sil('gluteo'), tone: 'tone-f', click: "go('corpo-gluteo')" },
+        { t: 'Protocolo Adv.', sub: '12 semanas PPL', price: 'R$ 147', art: sil('full'), tone: 'tone-d', click: "go('protocolo-adv')" }
+      ];
+      el.innerHTML = products.map(p => {
+        const bg = p.style ? ' style="' + p.style + '"' : '';
         const cls = 'shop-img' + (p.tone ? ' ' + p.tone : '');
         return '<button class="shop-card" onclick="' + p.click + '">' +
           '<div class="' + cls + '"' + bg + '><div class="pack-mark">' + p.art + '</div></div>' +
