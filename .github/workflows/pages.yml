@@ -22,23 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Prepare site
         run: |
-          set -euo pipefail
           mkdir -p _site
-          cat chunks/part-01.html chunks/part-02.html chunks/part-03.html \
-              chunks/part-04.html chunks/part-05.html chunks/part-06.html \
-              chunks/part-07.html > _site/index.html
-          cp README.md _site/
+          cp index.html README.md _site/
           cp -r assets _site/
           touch _site/.nojekyll
-
       - uses: actions/configure-pages@v5
-
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
       - id: deployment
         uses: actions/deploy-pages@v4
