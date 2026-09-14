@@ -1,19 +1,15 @@
 name: Deploy GitHub Pages
-
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: pages
   cancel-in-progress: true
-
 jobs:
   deploy:
     environment:
@@ -21,32 +17,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Prepare site
         run: |
           mkdir -p _site
-          if [ -f index.html ]; then
-            cp index.html _site/
-          elif [ -d chunks ]; then
-            cat chunks/part-1.html chunks/part-2.html chunks/part-3.html > _site/index.html
-          else
-            echo "No index.html or chunks found" >&2
-            exit 1
-          fi
-          cp README.md _site/
+          cp index.html README.md _site/
           cp -r assets _site/
           touch _site/.nojekyll
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
