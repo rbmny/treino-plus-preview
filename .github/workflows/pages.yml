@@ -24,10 +24,22 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare site
         run: |
+          set -euo pipefail
           mkdir -p _site
-          cp index.html README.md _site/
+          # Prefer full index.html; otherwise assemble from chunks (stub is ~128 bytes)
+          if [ -f index.html ] && [ "$(wc -c < index.html)" -gt 1000 ]; then
+            cp index.html _site/
+          else
+            cat chunks/part-01.html chunks/part-02.html chunks/part-03.html \
+                chunks/part-04.html chunks/part-05.html chunks/part-06.html \
+                chunks/part-07.html > _site/index.html
+          fi
+          test "$(wc -c < _site/index.html)" -gt 10000
+          grep -q "Olá" _site/index.html || grep -q "Continuar" _site/index.html
+          cp README.md _site/ 2>/dev/null || true
           cp -r assets _site/
           touch _site/.nojekyll
+          wc -c _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
