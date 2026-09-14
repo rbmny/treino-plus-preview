@@ -1,0 +1,229 @@
+            <div class="explore-art tone-run5" id="home-run-art"></div>
+            <div class="explore-body">
+              <span class="badge">Corrida</span>
+              <strong>0 → 5 e 0 → 10 km</strong>
+              <p>Programas progressivos com rota</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-treinos" data-tab="treinos">
+        <header class="header">
+          <h1 class="large-title">Treinos</h1>
+          <p class="header-sub">Escolha o grupo muscular ou um método</p>
+        </header>
+
+        <button class="fast-banner" onclick="go('fast')">
+          <div class="kicker">Sessão rápida</div>
+          <h3>Fast Trainer</h3>
+          <p>Quicky · 15 min · sem equipamento</p>
+          <svg class="ring" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4"/>
+            <circle cx="32" cy="32" r="28" fill="none" stroke="#007AFF" stroke-width="4" stroke-dasharray="132" stroke-dashoffset="40" stroke-linecap="round" transform="rotate(-90 32 32)"/>
+            <text x="32" y="36" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="inherit">15</text>
+          </svg>
+        </button>
+
+        <p class="sec">Protocolos</p>
+        <button class="proto-card" onclick="go('protocolo-inter')">
+          <div class="proto-cover inter" id="proto-hub-inter">
+            <span class="level-badge">Nível 2</span>
+            <div class="kicker">Seu plano atual</div>
+            <h3>Intermediário</h3>
+          </div>
+          <div class="proto-meta">
+            <span class="chip accent">8 semanas</span>
+            <span class="chip">4× / semana</span>
+            <span class="chip">45–60 min</span>
+          </div>
+        </button>
+        <button class="proto-card" onclick="go('protocolo-adv')">
+          <div class="proto-cover adv" id="proto-hub-adv">
+            <span class="level-badge">Nível 3</span>
+            <div class="kicker">Próximo nível</div>
+            <h3>Avançado</h3>
+          </div>
+          <div class="proto-meta">
+            <span class="chip">12 semanas</span>
+            <span class="chip">5–6× / semana</span>
+            <span class="chip">PPL · RPE</span>
+          </div>
+        </button>
+
+        <p class="sec">Métodos</p>
+        <button class="feature-tile" onclick="go('corpo-gluteo')">
+          <div class="art tone-f" data-sil="gluteo"></div>
+          <div class="body">
+            <span class="badge orange">Destaque</span>
+            <strong>Método Glúteo</strong>
+            <p>12 treinos gravados · progressão</p>
+          </div>
+        </button>
+        <button class="feature-tile" onclick="go('corpo-full')">
+          <div class="art tone-h" data-sil="full"></div>
+          <div class="body">
+            <span class="badge">Destaque</span>
+            <strong>Full body</strong>
+            <p>Sessões completas A · B · Express</p>
+          </div>
+        </button>
+
+        <p class="sec">Grupos musculares</p>
+        <div class="body-grid" id="treinos-body-grid"></div>
+      </section>
+
+      <section class="screen" id="screen-corpo" data-tab="treinos">
+        <div class="nav">
+          <button class="nav-back" onclick="go('treinos')" aria-label="Voltar para Treinos">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Treinos
+          </button>
+          <div class="nav-title" id="corpo-nav-title">Grupo</div>
+        </div>
+        <div class="body-detail-hero" id="corpo-hero"></div>
+        <header class="header" style="padding-top:0">
+          <h1 class="large-title" id="corpo-title">Grupo</h1>
+          <p class="header-sub" id="corpo-sub">Treinos gravados</p>
+        </header>
+        <div id="corpo-workouts"></div>
+      </section>
+
+      <section class="screen" id="screen-protocolo-inter" data-tab="treinos">
+        <div class="nav">
+          <button class="nav-back" onclick="go('treinos')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Treinos
+          </button>
+          <div class="nav-title">Protocolo</div>
+        </div>
+        <div class="proto-card" style="pointer-events:none;margin-top:8px">
+          <div class="proto-cover inter" id="proto-detail-inter">
+            <span class="level-badge">Nível 2</span>
+            <div class="kicker">8 semanas · hipertrofia</div>
+            <h3>Intermediário</h3>
+          </div>
+          <div class="proto-meta">
+            <span class="chip accent">4× / semana</span>
+            <span class="chip">45–60 min</span>
+            <span class="chip">Progressão linear</span>
+          </div>
+        </div>
+        <p class="footnote">Divisão ABC + full body. Para quem já treina há 6 meses ou mais.</p>
+        <p class="sec">Semana 3</p>
+        <div id="proto-inter-sessions"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Protocolo Intermediário iniciado')">Continuar treino de hoje</button>
+          <button class="btn gray" onclick="toast('PDF do protocolo baixado (demo)')">Baixar PDF</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-protocolo-adv" data-tab="treinos">
+        <div class="nav">
+          <button class="nav-back" onclick="go('treinos')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Treinos
+          </button>
+          <div class="nav-title">Protocolo</div>
+        </div>
+        <div class="proto-card" style="pointer-events:none;margin-top:8px">
+          <div class="proto-cover adv" id="proto-detail-adv">
+            <span class="level-badge">Nível 3</span>
+            <div class="kicker">12 semanas · periodização</div>
+            <h3>Avançado</h3>
+          </div>
+          <div class="proto-meta">
+            <span class="chip accent">5–6× / semana</span>
+            <span class="chip">60–75 min</span>
+            <span class="chip">PPL · RPE</span>
+          </div>
+        </div>
+        <p class="footnote">Para atletas experientes. Mesociclos de volume, intensidade e deload.</p>
+        <p class="sec">Estrutura</p>
+        <div id="proto-adv-blocks"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Protocolo Avançado adicionado ao plano')">Começar protocolo</button>
+          <button class="btn gray" onclick="go('protocolo-inter')">Ver Intermediário</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-fast" data-tab="treinos">
+        <div class="nav">
+          <button class="nav-back" onclick="go('treinos')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Treinos
+          </button>
+          <div class="nav-title">Fast Trainer</div>
+        </div>
+        <button class="fast-start" onclick="toast('Timer iniciado')">
+          <div class="kicker">Sessão rápida</div>
+          <h2>Quicky</h2>
+          <p>Circuito HIIT · 4 rounds · sem equipamento</p>
+          <div class="timer-art" id="fast-timer-art"></div>
+        </button>
+        <div class="fast-meta">
+          <span class="chip accent">40s / 20s</span>
+          <span class="chip">4 rounds</span>
+          <span class="chip">Bodyweight</span>
+        </div>
+        <p class="sec">Exercícios</p>
+        <div id="fast-workouts"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Timer iniciado')">Iniciar agora</button>
+          <button class="btn gray" onclick="toast('Outras opções: 10 min · 20 min')">Ver outras durações</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-corrida" data-tab="corrida">
+        <header class="header">
+          <h1 class="large-title">Corrida</h1>
+          <p class="header-sub">Do zero até a sua meta</p>
+        </header>
+
+        <button class="run-card" onclick="go('corrida-5k')">
+          <div class="run-visual tone-run5">
+            <div class="dist">5<small>km</small></div>
+            <svg class="run-path" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+              <path d="M8 70 C30 20, 50 80, 70 40 S110 10, 150 55" stroke="#007AFF" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+              <circle cx="8" cy="70" r="5" fill="#007AFF"/>
+              <circle cx="150" cy="55" r="5" fill="#007AFF"/>
+              <path d="M8 70 C30 20, 50 80, 70 40 S110 10, 150 55" stroke="#007AFF" stroke-width="10" stroke-linecap="round" opacity="0.12"/>
+            </svg>
+          </div>
+          <div class="run-body">
+            <h3>0 → 5 km</h3>
+            <p>8 semanas · caminhada e corrida · 3× por semana</p>
+          </div>
+        </button>
+
+        <button class="run-card" onclick="go('corrida-10k')">
+          <div class="run-visual tone-run10">
+            <div class="dist">10<small>km</small></div>
+            <svg class="run-path" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+              <path d="M6 75 C25 30, 45 20, 60 50 S95 85, 120 35 S145 15, 154 40" stroke="#5856D6" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+              <circle cx="6" cy="75" r="5" fill="#5856D6"/>
+              <circle cx="154" cy="40" r="5" fill="#5856D6"/>
+              <path d="M6 75 C25 30, 45 20, 60 50 S95 85, 120 35 S145 15, 154 40" stroke="#5856D6" stroke-width="10" stroke-linecap="round" opacity="0.12"/>
+            </svg>
+          </div>
+          <div class="run-body">
+            <h3>0 → 10 km</h3>
+            <p>12 semanas · endurance · 3–4× por semana</p>
+          </div>
+        </button>
+        <p class="footnote">Comece pelo 5 km se você está há mais de 3 meses sem correr. O foco é consistência.</p>
+      </section>
+
+      <section class="screen" id="screen-corrida-5k" data-tab="corrida">
+        <div class="nav">
+          <button class="nav-back" onclick="go('corrida')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Corrida
+          </button>
+          <div class="nav-title">Programa</div>
+        </div>
+        <div class="run-cover tone-run5" id="run-cover-5k">
+          <div class="dist">5<small>km</small></div>
+        </div>
+        <header class="header" style="padding-top:0">
+          <h1 class="large-title">0 → 5 km</h1>
