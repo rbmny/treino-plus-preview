@@ -1,0 +1,87 @@
+       const bg = p.style ? ' style="' + p.style + '"' : '';
+        const cls = 'shop-img' + (p.tone ? ' ' + p.tone : '');
+        return '<button class="shop-card" onclick="' + p.click + '">' +
+          '<div class="' + cls + '"' + bg + '><div class="pack-mark">' + p.art + '</div></div>' +
+          '<div class="shop-info"><strong>' + p.t + '</strong>' +
+          '<div class="sub">' + p.sub + '</div>' +
+          '<div class="price">' + p.price + '</div>' +
+          '<div class="shop-cta">Ver detalhes</div></div></button>';
+      }).join('');
+    }
+
+    function openBody(part) {
+      const m = BodySilhouette.META[part];
+      if (!m) return go('treinos');
+      document.getElementById('corpo-nav-title').textContent = m.label;
+      document.getElementById('corpo-title').textContent = m.label;
+      document.getElementById('corpo-sub').textContent = COUNTS[part] + ' · vídeos sob demanda';
+      document.getElementById('corpo-hero').className = 'body-detail-hero tone-' + m.tone;
+      document.getElementById('corpo-hero').innerHTML = sil(part);
+      const list = WORKOUTS[part] || [];
+      document.getElementById('corpo-workouts').innerHTML = list.map(w =>
+        '<button class="workout-card" onclick="toast(\'Reproduzindo: ' + w.t.replace(/'/g, "\\'") + '\')">' +
+          '<div class="workout-thumb tone-' + m.tone + '">' + sil(part) + PLAY + '</div>' +
+          '<div class="workout-info"><strong>' + w.t + '</strong><span>' + w.m + '</span></div></button>'
+      ).join('');
+    }
+
+    const TAB_ROOT = {
+      inicio: 'home', treinos: 'treinos', corrida: 'corrida', loja: 'loja', perfil: 'perfil'
+    };
+
+    function go(name) {
+      if (name.startsWith('corpo-')) {
+        const part = name.slice(6);
+        openBody(part);
+        name = 'corpo';
+        history.replaceState(null, '', '#corpo-' + part);
+      } else {
+        history.replaceState(null, '', '#' + name);
+      }
+      const el = document.getElementById('screen-' + name);
+      if (!el) return;
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      window.scrollTo(0, 0);
+      const tab = el.dataset.tab;
+      if (tab) setActiveTab(tab);
+    }
+
+    function tabGo(tab) { go(TAB_ROOT[tab] || 'home'); }
+
+    function setActiveTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('on', t.dataset.tab === tab);
+      });
+    }
+
+    let toastTimer;
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    (function init() {
+      try { buildHome(); } catch (e) { console.error(e); }
+      try { buildTreinosGrid(); } catch (e) { console.error(e); }
+      try { buildProtocolos(); } catch (e) { console.error(e); }
+      try { buildFast(); } catch (e) { console.error(e); }
+      try { buildCorrida(); } catch (e) { console.error(e); }
+      try { buildAdaptacoes(); } catch (e) { console.error(e); }
+      try { buildEbook(); } catch (e) { console.error(e); }
+      try { buildLoja(); } catch (e) { console.error(e); }
+      const raw = (location.hash || '#home').slice(1);
+      if (raw.startsWith('corpo-')) go(raw);
+      else if (document.getElementById('screen-' + raw)) go(raw);
+      else go('home');
+      window.addEventListener('hashchange', () => {
+        const h = (location.hash || '#home').slice(1);
+        if (h.startsWith('corpo-') || document.getElementById('screen-' + h)) go(h);
+      });
+    })();
+  </script>
+</body>
+</html>
