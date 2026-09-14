@@ -24,10 +24,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare site (exclude shots)
+      - name: Prepare site
         run: |
           mkdir -p _site
-          cp index.html README.md _site/
+          if [ -f index.html ]; then
+            cp index.html _site/
+          elif [ -d chunks ]; then
+            cat chunks/part-1.html chunks/part-2.html chunks/part-3.html > _site/index.html
+          else
+            echo "No index.html or chunks found" >&2
+            exit 1
+          fi
+          cp README.md _site/
           cp -r assets _site/
           touch _site/.nojekyll
 
