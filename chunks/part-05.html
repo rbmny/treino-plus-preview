@@ -1,0 +1,185 @@
+          <p class="header-sub">8 semanas · caminhada e corrida</p>
+        </header>
+        <div class="meta-chips">
+          <span class="chip accent">3× / semana</span>
+          <span class="chip">~30 min</span>
+          <span class="chip">Iniciante</span>
+        </div>
+        <p class="sec sm">Semanas</p>
+        <div class="week-chips" id="run-5k-weeks"></div>
+        <p class="sec">Semana 1 · plano</p>
+        <div class="day-grid" id="run-5k-days"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Programa 0 → 5 km ativado')">Começar programa</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-corrida-10k" data-tab="corrida">
+        <div class="nav">
+          <button class="nav-back" onclick="go('corrida')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Corrida
+          </button>
+          <div class="nav-title">Programa</div>
+        </div>
+        <div class="run-cover tone-run10" id="run-cover-10k">
+          <div class="dist">10<small>km</small></div>
+        </div>
+        <header class="header" style="padding-top:0">
+          <h1 class="large-title">0 → 10 km</h1>
+          <p class="header-sub">12 semanas · endurance</p>
+        </header>
+        <div class="meta-chips">
+          <span class="chip accent">3–4× / semana</span>
+          <span class="chip">~45 min</span>
+          <span class="chip">Progressivo</span>
+        </div>
+        <p class="sec sm">Fases</p>
+        <div class="week-chips" id="run-10k-weeks"></div>
+        <p class="sec">Progressão</p>
+        <div class="day-grid" id="run-10k-days"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Programa 0 → 10 km ativado')">Começar programa</button>
+          <button class="btn gray" onclick="go('corrida-5k')">Começar pelos 5 km</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-adaptacoes" data-tab="inicio">
+        <div class="nav">
+          <button class="nav-back" onclick="go('home')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Início
+          </button>
+        </div>
+        <header class="header">
+          <h1 class="large-title">Adaptações</h1>
+          <p class="header-sub">Programas seguros para condições específicas</p>
+        </header>
+        <div class="adapt-grid" id="adapt-hub-grid"></div>
+      </section>
+
+      <section class="screen" id="screen-adapt-lipedema" data-tab="inicio">
+        <div class="nav"><button class="nav-back" onclick="go('adaptacoes')"><svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>Adaptações</button></div>
+        <div class="adapt-hero tone-run5" id="adapt-hero-lipedema"></div>
+        <header class="header" style="padding-top:0"><h1 class="large-title">Lipedema</h1><p class="header-sub">6 semanas · baixo impacto</p></header>
+        <p class="prose secondary">Exercícios que respeitam o tecido adiposo doloroso, priorizando circulação e força leve.</p>
+        <div id="adapt-content-lipedema"></div>
+        <div class="actions"><button class="btn primary" onclick="toast('Adaptação Lipedema salva no plano')">Acessar programa</button></div>
+      </section>
+
+      <section class="screen" id="screen-adapt-gravida" data-tab="inicio">
+        <div class="nav"><button class="nav-back" onclick="go('adaptacoes')"><svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>Adaptações</button></div>
+        <div class="adapt-hero tone-f" id="adapt-hero-gravida"></div>
+        <header class="header" style="padding-top:0"><h1 class="large-title">Grávidas</h1><p class="header-sub">1º · 2º · 3º trimestre</p></header>
+        <p class="prose secondary">Movimento seguro com foco em postura e assoalho pélvico. Sempre com liberação médica.</p>
+        <div id="adapt-content-gravida"></div>
+        <div class="actions"><button class="btn primary" onclick="toast('Programa Gestação ativado')">Acessar programa</button></div>
+      </section>
+
+      <section class="screen" id="screen-adapt-joelho" data-tab="inicio">
+        <div class="nav"><button class="nav-back" onclick="go('adaptacoes')"><svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>Adaptações</button></div>
+        <div class="adapt-hero tone-i" id="adapt-hero-joelho"></div>
+        <header class="header" style="padding-top:0"><h1 class="large-title">Dores no joelho</h1><p class="header-sub">Estabilidade sem impacto</p></header>
+        <p class="prose secondary">Fortalecimento de quadril e posteriores, com amplitude controlada.</p>
+        <div id="adapt-content-joelho"></div>
+        <div class="actions"><button class="btn primary" onclick="toast('Adaptação Joelho salva no plano')">Acessar programa</button></div>
+      </section>
+
+      <section class="screen" id="screen-adapt-coluna" data-tab="inicio">
+        <div class="nav"><button class="nav-back" onclick="go('adaptacoes')"><svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>Adaptações</button></div>
+        <div class="adapt-hero tone-d" id="adapt-hero-coluna"></div>
+        <header class="header" style="padding-top:0"><h1 class="large-title">Dores na coluna</h1><p class="header-sub">Core, mobilidade e postura</p></header>
+        <p class="prose secondary">Estabilidade do tronco sem flexões agressivas.</p>
+        <div id="adapt-content-coluna"></div>
+        <div class="actions"><button class="btn primary" onclick="toast('Adaptação Coluna salva no plano')">Acessar programa</button></div>
+      </section>
+
+      <section class="screen" id="screen-ebook" data-tab="loja">
+        <div class="nav">
+          <button class="nav-back" onclick="go('home')">
+            <svg viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>
+            Início
+          </button>
+          <div class="nav-title">Ebook</div>
+        </div>
+        <div class="ebook-cover">
+          <div>
+            <div class="brand">Treino+</div>
+            <h2>Nutrição<br>para quem<br>treina</h2>
+          </div>
+          <div class="pages">Guia prático · 48 páginas</div>
+        </div>
+        <div class="meta-chips" style="margin-top:16px;justify-content:center">
+          <span class="chip accent">7 capítulos</span>
+          <span class="chip">PDF e app</span>
+          <span class="chip">R$ 47</span>
+        </div>
+        <p class="sec">Capítulos</p>
+        <div id="ebook-chapters"></div>
+        <p class="sec">Prévia</p>
+        <div class="reader">
+          <h3>Cap. 2 — Proteína no dia a dia</h3>
+          <p>Para hipertrofia, uma meta prática é 1,6 a 2,2 g de proteína por kg. Distribua em 3–5 refeições.</p>
+          <p>Hidratação: 35–40 ml por kg. Em treinos longos, considere eletrólitos.</p>
+        </div>
+        <div class="actions">
+          <button class="btn primary" onclick="toast('Abrindo leitor completo (demo)')">Continuar leitura</button>
+          <button class="btn gray" onclick="toast('PDF baixado (demo)')">Baixar PDF</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-loja" data-tab="loja">
+        <header class="header">
+          <h1 class="large-title">Loja</h1>
+          <p class="header-sub">Digitais e físicos selecionados</p>
+        </header>
+        <div class="shop-grid" id="shop-grid"></div>
+        <p class="footnote">Assinantes têm acesso a protocolos, vídeos, Fast Trainer, corrida e adaptações.</p>
+      </section>
+
+      <section class="screen" id="screen-perfil" data-tab="perfil">
+        <header class="header">
+          <h1 class="large-title">Perfil</h1>
+        </header>
+        <div class="profile-block">
+          <div class="avatar">AS</div>
+          <h2>Ana Silva</h2>
+          <p>Aluna · desde mar. 2026</p>
+        </div>
+        <button class="member-card" onclick="go('protocolo-inter')" aria-label="Meu plano">
+          <div class="kicker">Assinatura ativa</div>
+          <h3>Plano Intermediário</h3>
+          <p>Semana 3 de 8 · renovação em out. 2026</p>
+          <div class="stats">
+            <div><b>24</b><span>Treinos</span></div>
+            <div><b>12</b><span>Dias seguidos</span></div>
+            <div><b>38%</b><span>Protocolo</span></div>
+          </div>
+        </button>
+        <div class="group">
+          <button class="row tappable" onclick="toast('Editar perfil (demo)')">
+            <div class="row-body"><div class="row-title">Editar perfil</div><div class="row-caption">Nome, foto, objetivos</div></div>
+            <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1l6 6-6 6"/></svg>
+          </button>
+          <button class="row tappable" onclick="toast('Notificações (demo)')">
+            <div class="row-body"><div class="row-title">Notificações</div><div class="row-caption">Lembretes de treino</div></div>
+            <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1l6 6-6 6"/></svg>
+          </button>
+          <button class="row tappable" onclick="toast('Suporte ao coach (demo)')">
+            <div class="row-body"><div class="row-title">Falar com o coach</div><div class="row-caption">Mensagem assíncrona</div></div>
+            <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="actions">
+          <button class="btn gray" onclick="toast('Sessão encerrada (demo)')">Sair da conta</button>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tab-bar" aria-label="Navegação principal">
+      <button class="tab on" data-tab="inicio" onclick="tabGo('inicio')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-5.2v-6.2H10.2V21H5a1 1 0 0 1-1-1v-9.5z"/></svg>
+        <span>Início</span>
+      </button>
+      <button class="tab" data-tab="treinos" onclick="tabGo('treinos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8.5V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.5"/><rect x="5" y="8.5" width="14" height="10.5" rx="2"/><path d="M9 13h6"/></svg>
