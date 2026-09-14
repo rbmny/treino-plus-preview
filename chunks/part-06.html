@@ -1,0 +1,211 @@
+        <span>Treinos</span>
+      </button>
+      <button class="tab" data-tab="corrida" onclick="tabGo('corrida')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14.5" cy="5.2" r="1.5"/><path d="M5.5 20.5l3.4-6.5 3.1 2.3 2.4-4.6"/><path d="M8.9 14L7.4 11.2l3.4-2.3 2.9 1.1 3.6 1.6 2.1 5"/></svg>
+        <span>Corrida</span>
+      </button>
+      <button class="tab" data-tab="loja" onclick="tabGo('loja')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 8.5h11.2l-.8 11.2a1.6 1.6 0 0 1-1.6 1.5H8.8a1.6 1.6 0 0 1-1.6-1.5L6.4 8.5z"/><path d="M9 8.5V7.2A3 3 0 0 1 12 4.2 3 3 0 0 1 15 7.2v1.3"/></svg>
+        <span>Loja</span>
+      </button>
+      <button class="tab" data-tab="perfil" onclick="tabGo('perfil')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.6 19.2c.8-3.2 3.3-5 6.4-5s5.6 1.8 6.4 5"/></svg>
+        <span>Perfil</span>
+      </button>
+    </nav>
+
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+
+  <script src="assets/body-silhouettes.js"></script>
+  <script src="assets/illustrations.js"></script>
+  <script>
+    const BODY_ORDER = ['peito','costas','biceps','triceps','ombros','gluteo','pernas','full','core'];
+
+    const WORKOUTS = {
+      peito: [
+        { t: 'Supino e crucifixo', m: '28 min · Intermediário' },
+        { t: 'Peito com halteres', m: '22 min · Iniciante' },
+        { t: 'Upper push', m: '35 min · Avançado' },
+        { t: 'Peito express', m: '15 min · Todos' }
+      ],
+      costas: [
+        { t: 'Puxada e remada', m: '30 min · Intermediário' },
+        { t: 'Costas com bandas', m: '20 min · Iniciante' },
+        { t: 'Pull strength', m: '40 min · Avançado' },
+        { t: 'Posterior de ombro', m: '18 min · Todos' }
+      ],
+      biceps: [
+        { t: 'Rosca progressiva', m: '18 min · Intermediário' },
+        { t: 'Bíceps e antebraço', m: '22 min · Intermediário' },
+        { t: 'Arms pump', m: '25 min · Avançado' },
+        { t: 'Bíceps express', m: '12 min · Todos' }
+      ],
+      triceps: [
+        { t: 'Tríceps corda e banco', m: '20 min · Intermediário' },
+        { t: 'Extensão overhead', m: '16 min · Iniciante' },
+        { t: 'Push finishers', m: '24 min · Avançado' },
+        { t: 'Tríceps express', m: '12 min · Todos' }
+      ],
+      ombros: [
+        { t: 'Desenvolvimento e elevações', m: '26 min · Intermediário' },
+        { t: 'Ombros com bandas', m: '18 min · Iniciante' },
+        { t: 'Shoulder stability', m: '30 min · Avançado' },
+        { t: 'Ombros express', m: '14 min · Todos' }
+      ],
+      gluteo: [
+        { t: 'Ativação de glúteo', m: '18 min · Iniciante' },
+        { t: 'Hip thrust progressivo', m: '25 min · Intermediário' },
+        { t: 'Posterior + glúteo', m: '32 min · Avançado' },
+        { t: 'Glúteo express', m: '15 min · Todos' }
+      ],
+      pernas: [
+        { t: 'Agachamento e stiff', m: '35 min · Intermediário' },
+        { t: 'Pernas com bandas', m: '22 min · Iniciante' },
+        { t: 'Quad dominant', m: '40 min · Avançado' },
+        { t: 'Pernas express', m: '18 min · Todos' }
+      ],
+      full: [
+        { t: 'Full body A', m: '40 min · Intermediário' },
+        { t: 'Full body B', m: '35 min · Intermediário' },
+        { t: 'Full body express', m: '22 min · Todos' },
+        { t: 'Full body strength', m: '45 min · Avançado' }
+      ],
+      core: [
+        { t: 'Core anti-extensão', m: '16 min · Intermediário' },
+        { t: 'Prancha e dead bug', m: '14 min · Iniciante' },
+        { t: 'Core rotacional', m: '20 min · Avançado' },
+        { t: 'Core express', m: '10 min · Todos' }
+      ]
+    };
+
+    const COUNTS = Object.fromEntries(
+      Object.entries(WORKOUTS).map(([k, v]) => [k, v.length + ' treinos'])
+    );
+
+    const PLAY = '<span class="play"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M3 1.5v9l8-4.5z"/></svg></span>';
+
+    function sil(part) {
+      return BodySilhouette.render(part).svg;
+    }
+
+    function fillSilTargets() {
+      document.querySelectorAll('[data-sil]').forEach(el => {
+        el.innerHTML = sil(el.dataset.sil);
+      });
+    }
+
+    function mountCollage(el, parts) {
+      if (!el) return;
+      const existing = el.querySelector('.sil-collage');
+      if (existing) existing.remove();
+      el.insertAdjacentHTML('beforeend', Illustrations.collage(parts));
+    }
+
+    function sessionCard(part, title, caption, tag) {
+      const m = BodySilhouette.META[part];
+      const tagHtml = tag ? '<span class="tag">' + tag + '</span>' : '';
+      return '<button class="session-card" onclick="toast(\'Abrindo: ' + title.replace(/'/g, "\\'") + '\')">' +
+        '<div class="session-thumb tone-' + m.tone + '">' + sil(part) + '</div>' +
+        '<div class="session-info"><strong>' + title + '</strong><span>' + caption + '</span>' + tagHtml + '</div></button>';
+    }
+
+    function buildHome() {
+      const hero = document.getElementById('home-hero-sil');
+      if (hero) hero.innerHTML = BodySilhouette.render('peito').svg;
+
+      const homeContinue = document.getElementById('home-continue');
+      if (homeContinue) homeContinue.innerHTML =
+        '<button class="continue-card" onclick="go(\'protocolo-inter\')">' +
+          '<div class="thumb tone-a">' + sil('peito') + '</div>' +
+          '<div class="info"><strong>Treino A · Peito</strong><span>Continuar · 38%</span>' +
+            '<div class="progress"><span style="width:38%"></span></div></div></button>' +
+        '<button class="continue-card" onclick="go(\'fast\')">' +
+          '<div class="thumb tone-fast">' + sil('full') + '</div>' +
+          '<div class="info"><strong>Fast Trainer</strong><span>15 min · Quicky</span></div></button>' +
+        '<button class="continue-card" onclick="go(\'corrida-5k\')">' +
+          '<div class="thumb tone-run5">' + Illustrations.route('#007AFF').replace('viewBox="0 0 160 90"', 'viewBox="0 0 160 90" width="72" height="40"') + '</div>' +
+          '<div class="info"><strong>0 → 5 km</strong><span>Semana 1 pronta</span></div></button>';
+
+      const adaptArt = document.getElementById('home-adapt-art');
+      if (adaptArt) adaptArt.innerHTML = Illustrations.adaptColuna();
+      const ebookArt = document.getElementById('home-ebook-art');
+      if (ebookArt) ebookArt.innerHTML = Illustrations.bookMark();
+      const runArt = document.getElementById('home-run-art');
+      if (runArt) runArt.innerHTML = Illustrations.route('#007AFF');
+    }
+
+    function buildTreinosGrid() {
+      document.getElementById('treinos-body-grid').innerHTML = BODY_ORDER.map(id => {
+        const m = BodySilhouette.META[id];
+        return '<button class="body-card" onclick="go(\'corpo-' + id + '\')">' +
+          '<div class="body-visual tone-' + m.tone + '">' + sil(id) + '</div>' +
+          '<div class="label">' + m.label + '<span>' + COUNTS[id] + '</span></div></button>';
+      }).join('');
+      fillSilTargets();
+      mountCollage(document.getElementById('proto-hub-inter'), ['peito', 'costas', 'pernas']);
+      mountCollage(document.getElementById('proto-hub-adv'), ['ombros', 'costas', 'gluteo']);
+    }
+
+    function buildProtocolos() {
+      mountCollage(document.getElementById('proto-detail-inter'), ['peito', 'costas', 'pernas']);
+      mountCollage(document.getElementById('proto-detail-adv'), ['ombros', 'costas', 'gluteo']);
+
+      const inter = document.getElementById('proto-inter-sessions');
+      if (inter) inter.innerHTML =
+        sessionCard('peito', 'Peito, ombro e tríceps', '8 exercícios · 45–60 min', 'Hoje') +
+        sessionCard('costas', 'Costas e bíceps', '7 exercícios · 45–60 min', '') +
+        sessionCard('pernas', 'Pernas e glúteo', '8 exercícios · 45–60 min', '');
+
+      const adv = document.getElementById('proto-adv-blocks');
+      if (adv) adv.innerHTML =
+        sessionCard('full', 'Semanas 1–4 · Volume', 'Séries totais e densidade', 'Base') +
+        sessionCard('peito', 'Semanas 5–8 · Intensidade', 'Cargas maiores · RPE alto', '') +
+        sessionCard('core', 'Semanas 9–12 · Pico e deload', 'Testes e recuperação', '');
+    }
+
+    function buildFast() {
+      const timer = document.getElementById('fast-timer-art');
+      if (timer) timer.innerHTML = Illustrations.timerRing(15);
+
+      const list = document.getElementById('fast-workouts');
+      if (!list) return;
+      const items = [
+        { part: 'pernas', t: 'Agachamento', m: '40s · 20s descanso' },
+        { part: 'peito', t: 'Flexão (joelhos ok)', m: '40s · 20s descanso' },
+        { part: 'gluteo', t: 'Afundo alternado', m: '40s · 20s descanso' },
+        { part: 'core', t: 'Prancha', m: '40s · 20s descanso' },
+        { part: 'full', t: 'Burpee modificado', m: '40s · 60s entre rounds' }
+      ];
+      list.innerHTML = items.map(w => {
+        const m = BodySilhouette.META[w.part];
+        return '<button class="workout-card" onclick="toast(\'Exercício: ' + w.t.replace(/'/g, "\\'") + '\')">' +
+          '<div class="workout-thumb tone-' + m.tone + '">' + sil(w.part) + PLAY + '</div>' +
+          '<div class="workout-info"><strong>' + w.t + '</strong><span>' + w.m + '</span></div></button>';
+      }).join('');
+    }
+
+    function buildCorrida() {
+      const c5 = document.getElementById('run-cover-5k');
+      if (c5 && !c5.querySelector('.run-path')) {
+        c5.insertAdjacentHTML('beforeend', '<div class="run-path">' + Illustrations.route('#007AFF') + '</div>');
+      }
+      const c10 = document.getElementById('run-cover-10k');
+      if (c10 && !c10.querySelector('.run-path')) {
+        c10.insertAdjacentHTML('beforeend', '<div class="run-path">' + Illustrations.routeLong('#5856D6') + '</div>');
+      }
+
+      const w5 = document.getElementById('run-5k-weeks');
+      if (w5) w5.innerHTML = Array.from({length: 8}, (_, i) =>
+        '<button class="week-chip' + (i === 0 ? ' on' : '') + '" onclick="toast(\'Semana ' + (i+1) + '\')">' +
+        '<b>S' + (i+1) + '</b><span>' + (i === 0 ? 'Atual' : 'Bloqueada') + '</span></button>'
+      ).join('');
+
+      const d5 = document.getElementById('run-5k-days');
+      if (d5) d5.innerHTML =
+        '<button class="day-card" onclick="toast(\'Dia 1 · aquecimento\')">' +
+          '<div class="day-num tone-run5">1<small>Dia</small></div>' +
+          '<div><strong>Caminhada 5 min</strong><span>Aquecimento leve</span></div></button>' +
+        '<button class="day-card" onclick="toast(\'Dia 1 · intervalos\')">' +
+          '<div class="day-num tone-a">2<small>Bloco</small></div>' +
+          '<div><strong>Corrida 1 min + caminhada 2 min</strong><span>Repetir 6 vezes</span></div></button>' +
