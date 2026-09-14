@@ -1,0 +1,232 @@
+    }
+    .session-card:active { opacity: 0.88; }
+    .session-thumb {
+      width: 76px; height: 76px; border-radius: 12px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .session-thumb svg { width: 42px; height: 72px; }
+    .session-info strong { display: block; font-size: 16px; font-weight: 600; line-height: 1.25; }
+    .session-info span { display: block; font-size: 13px; color: var(--secondary); margin-top: 3px; }
+    .session-info .tag {
+      display: inline-flex; margin-top: 6px; font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 100px; background: rgba(0,122,255,0.12); color: var(--blue);
+    }
+
+    .fast-start {
+      margin: 8px 16px 16px; border-radius: 20px; overflow: hidden;
+      background: linear-gradient(160deg, #1C1C1E 0%, #2C2C2E 50%, #0A3D7A 140%);
+      color: #fff; padding: 24px 20px; position: relative; min-height: 168px;
+      box-shadow: var(--shadow); width: calc(100% - 32px); display: block;
+    }
+    .fast-start:active { opacity: 0.94; }
+    .fast-start .kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .fast-start h2 { font-size: 28px; font-weight: 700; margin-top: 6px; letter-spacing: -0.4px; }
+    .fast-start p { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 6px; max-width: 58%; }
+    .fast-start .timer-art {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 110px; height: 110px;
+    }
+    .fast-meta {
+      display: flex; gap: 8px; flex-wrap: wrap; padding: 0 16px 8px;
+    }
+
+    .day-grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 0 16px; }
+    .day-card {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 14px 16px; display: grid; grid-template-columns: 52px 1fr; gap: 14px;
+      align-items: center; min-height: 72px; width: 100%;
+    }
+    .day-card:active { opacity: 0.9; }
+    .day-num {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; letter-spacing: -0.3px;
+    }
+    .day-num small {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em; opacity: 0.7; margin-top: 1px;
+    }
+    .day-card strong { display: block; font-size: 15px; font-weight: 600; line-height: 1.25; }
+    .day-card span { display: block; font-size: 13px; color: var(--secondary); margin-top: 3px; }
+
+    .week-chips {
+      display: flex; gap: 8px; overflow-x: auto; padding: 0 16px 12px;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .week-chips::-webkit-scrollbar { display: none; }
+    .week-chip {
+      flex: 0 0 auto; background: var(--card); border-radius: 12px; box-shadow: var(--shadow);
+      padding: 12px 14px; min-width: 88px; text-align: center;
+    }
+    .week-chip.on { box-shadow: 0 0 0 2px var(--blue), var(--shadow); }
+    .week-chip b { display: block; font-size: 15px; font-weight: 700; }
+    .week-chip span { display: block; font-size: 11px; color: var(--secondary); margin-top: 2px; }
+
+    .run-cover {
+      margin: 4px 16px 16px; border-radius: 18px; overflow: hidden;
+      height: 160px; position: relative; box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
+    }
+    .run-cover .dist {
+      font-size: 48px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; position: relative; z-index: 1;
+    }
+    .run-cover .dist small { font-size: 20px; font-weight: 600; margin-left: 4px; opacity: 0.65; }
+    .run-cover .run-path { position: absolute; right: 4px; bottom: 4px; width: 180px; height: 100px; }
+
+    .adapt-tile {
+      padding: 0; overflow: hidden; min-height: 168px;
+    }
+    .adapt-visual {
+      height: 100px; display: flex; align-items: center; justify-content: center;
+    }
+    .adapt-visual svg { width: 64px; height: 64px; }
+    .adapt-tile .label {
+      padding: 12px 14px 16px; display: flex; flex-direction: column;
+    }
+    .adapt-tile .label strong { font-size: 16px; font-weight: 650; letter-spacing: -0.2px; }
+    .adapt-tile .label span { font-size: 13px; color: var(--secondary); margin-top: 3px; line-height: 1.3; }
+
+    .adapt-hero {
+      margin: 4px 16px 16px; border-radius: 18px; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow); overflow: hidden; position: relative;
+    }
+    .adapt-hero svg { width: 96px; height: 96px; }
+
+    .chapter-card {
+      margin: 0 16px 10px; background: var(--card); border-radius: var(--radius);
+      box-shadow: var(--shadow); display: grid; grid-template-columns: 56px 1fr;
+      gap: 12px; padding: 12px; align-items: center; width: calc(100% - 32px); min-height: 72px;
+    }
+    .chapter-card:active { opacity: 0.9; }
+    .chapter-num {
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #fff;
+      background: linear-gradient(155deg, #1A3A2A, #52B788);
+    }
+    .chapter-card strong { display: block; font-size: 15px; font-weight: 600; line-height: 1.25; }
+    .chapter-card span { display: block; font-size: 12px; color: var(--secondary); margin-top: 3px; }
+
+    .shop-img { height: 120px; position: relative; }
+    .shop-img .pack-mark { width: 56px; height: 48px; display: flex; align-items: center; justify-content: center; }
+    .shop-img .pack-mark svg { width: 100%; height: 100%; }
+    .shop-cta {
+      display: inline-flex; margin-top: 8px; font-size: 12px; font-weight: 600;
+      color: var(--blue);
+    }
+    .shop-card .shop-info { padding: 12px 12px 14px; }
+
+    .member-card {
+      margin: 0 16px 16px; border-radius: 18px; overflow: hidden;
+      background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 45%, #007AFF 160%);
+      color: #fff; padding: 20px; box-shadow: var(--shadow); position: relative;
+    }
+    .member-card .kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; opacity: 0.7;
+    }
+    .member-card h3 { font-size: 22px; font-weight: 700; margin-top: 4px; letter-spacing: -0.3px; }
+    .member-card p { font-size: 13px; opacity: 0.75; margin-top: 6px; }
+    .member-card .stats {
+      display: flex; gap: 18px; margin-top: 16px; padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .member-card .stats div { text-align: left; }
+    .member-card .stats b { display: block; font-size: 20px; font-weight: 700; }
+    .member-card .stats span { font-size: 11px; opacity: 0.65; }
+
+    .profile-block .avatar {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: linear-gradient(145deg, #E8EEF6, #D6E4F5);
+      color: var(--blue); font-size: 28px; box-shadow: var(--shadow);
+    }
+
+    .explore-grid { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 16px 8px; }
+    .explore-card {
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); display: grid; grid-template-columns: 112px 1fr; min-height: 108px;
+    }
+    .explore-card:active { opacity: 0.9; }
+    .explore-art {
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .explore-art svg { width: 72px; height: 72px; }
+    .explore-art.sil svg { width: 56px; height: 96px; }
+    .explore-body {
+      padding: 14px 14px 14px 8px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .explore-body strong { font-size: 17px; font-weight: 650; letter-spacing: -0.2px; }
+    .explore-body p { font-size: 13px; color: var(--secondary); margin-top: 4px; line-height: 1.3; }
+
+    .proto-cover { min-height: 132px; position: relative; }
+    .level-badge {
+      position: absolute; top: 14px; left: 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 100px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+
+    .meta-chips {
+      display: flex; gap: 8px; flex-wrap: wrap; padding: 0 16px 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app" role="application" aria-label="Treino+">
+    <div class="screens">
+
+      <section class="screen active" id="screen-home" data-tab="inicio">
+        <header class="header">
+          <h1 class="large-title">Olá, Ana</h1>
+          <p class="header-sub">Plano Intermediário · Semana 3 de 8</p>
+        </header>
+
+        <button class="hero" onclick="go('protocolo-inter')" aria-label="Continuar protocolo">
+          <div class="hero-bg"></div>
+          <div class="hero-art" id="home-hero-sil"></div>
+          <div class="hero-body">
+            <div class="hero-kicker">Em andamento</div>
+            <div class="hero-title">Peito, ombro<br>e tríceps</div>
+            <div class="hero-meta">Hoje · 45–60 min · 38% do protocolo</div>
+          </div>
+        </button>
+
+        <p class="sec">Continuar</p>
+        <div class="rail" id="home-continue"></div>
+
+        <p class="sec sm">Esta semana</p>
+        <div class="week-card">
+          <div class="week" aria-label="Progresso da semana">
+            <div class="week-day done"><span>S</span><b>1</b></div>
+            <div class="week-day done"><span>T</span><b>2</b></div>
+            <div class="week-day today"><span>Q</span><b>3</b></div>
+            <div class="week-day"><span>Q</span><b>4</b></div>
+            <div class="week-day"><span>S</span><b>5</b></div>
+            <div class="week-day"><span>S</span><b>6</b></div>
+            <div class="week-day"><span>D</span><b>7</b></div>
+          </div>
+        </div>
+
+        <p class="sec">Explorar</p>
+        <div class="explore-grid">
+          <button class="explore-card" onclick="go('adaptacoes')">
+            <div class="explore-art tone-i" id="home-adapt-art"></div>
+            <div class="explore-body">
+              <span class="badge">Programas</span>
+              <strong>Adaptações</strong>
+              <p>Lipedema, gestação, joelho e coluna</p>
+            </div>
+          </button>
+          <button class="explore-card" onclick="go('ebook')">
+            <div class="explore-art" style="background:linear-gradient(165deg,#1A3A2A,#52B788);" id="home-ebook-art"></div>
+            <div class="explore-body">
+              <span class="badge green">Novo</span>
+              <strong>Ebook de nutrição</strong>
+              <p>Guia prático · 48 páginas</p>
+            </div>
+          </button>
+          <button class="explore-card" onclick="go('corrida')">
