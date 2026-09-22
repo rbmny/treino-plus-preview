@@ -26,16 +26,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site
-          # Deploy committed Next static export at repo root.
-          # Exclude legacy trainer-preview assemble dirs if still present.
-          rsync -a \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='_site' \
-            --exclude='chunks' \
-            --exclude='site-encoded' \
-            --exclude='assets' \
-            ./ _site/
+          if [ -f chunks/MANIFEST.txt ]; then
+            echo "Assembling site from base64 chunks..."
+            cat chunks/part-*.b64 | tr -d '\n' | base64 -d > /tmp/site.tar.gz
+            tar -xzf /tmp/site.tar.gz -C _site
+            expected=$(awk -F= '/gzip_sha256/{print $2}' chunks/MANIFEST.txt)
+            actual=$(sha256sum /tmp/site.tar.gz | awk '{print $1}')
+            echo "expected=$expected actual=$actual"
+            test "$expected" = "$actual"
+          elif [ -d _next ] && [ -f index.html ]; then
+            rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='chunks' --exclude='site-encoded' --exclude='assets' ./ _site/
+          else
+            echo "No site payload found" >&2
+            exit 1
+          fi
           touch _site/.nojekyll
           test -f _site/index.html
           test -d _site/_next
