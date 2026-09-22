@@ -1,9 +1,7 @@
-# Treino Live — GitHub Pages preview
+# Treino+ / Treino Live — GitHub Pages
 
-Live: **https://rbmny.github.io/treino-plus-preview/**
+Public site: **https://rbmny.github.io/treino-plus-preview/**
 
-This repo’s GitHub Actions workflow builds the public app
-[`rbmny/treino-live`](https://github.com/rbmny/treino-live) with
-`output: 'export'` (`basePath` `/treino-plus-preview`) and deploys `out/`.
+This repo only hosts Pages. The app source is built from [`rbmny/treino-live`](https://github.com/rbmny/treino-live) on each push to `main` here (see `.github/workflows/pages.yml`).
 
-Demo UI uses **localStorage** (no Stripe API on Pages).
+Trigger rebuild: push any commit to this repo after updating `treino-live`.
