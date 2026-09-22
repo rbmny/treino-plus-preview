@@ -1,11 +1,9 @@
 # Treino Live — GitHub Pages preview
 
-Static export of **Treino Live** (Next.js `output: 'export'`).
+Live: **https://rbmny.github.io/treino-plus-preview/**
 
-**Live:** https://rbmny.github.io/treino-plus-preview/
+This repo’s GitHub Actions workflow builds the public app
+[`rbmny/treino-live`](https://github.com/rbmny/treino-live) with
+`output: 'export'` (`basePath` `/treino-plus-preview`) and deploys `out/`.
 
-- `basePath` / `assetPrefix`: `/treino-plus-preview`
-- Demo UI: localStorage (no Stripe API on Pages)
-- Source app: `rbmny/treino-live` → build writes `out/`, contents committed here
-
-Pages deploys via GitHub Actions (`.github/workflows/pages.yml`) from files at repo root.
+Demo UI uses **localStorage** (no Stripe API on Pages).

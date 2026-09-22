@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Also allow rebuilding when treino-live source changes (optional manual is enough)
 
 permissions:
   contents: read
@@ -15,38 +16,51 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Prepare site
+      - name: Checkout treino-live (public source)
+        uses: actions/checkout@v4
+        with:
+          repository: rbmny/treino-live
+          path: app
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install and static-export
+        working-directory: app
+        run: |
+          set -euo pipefail
+          # Ensure API routes are not present (static export blocker)
+          if [ -d src/app/api ]; then
+            mkdir -p _api_server_only
+            mv src/app/api _api_server_only/api || true
+          fi
+          npm ci
+          npm run build
+          test -f out/index.html
+          test -d out/_next
+          grep -q "Treino Live" out/index.html
+          grep -q "treino-plus-preview/_next" out/index.html
+          touch out/.nojekyll
+          wc -c out/index.html
+          find out -type f | wc -l
+
+      - name: Prepare Pages artifact
         run: |
           set -euo pipefail
           mkdir -p _site
-          if [ -f chunks/MANIFEST.txt ]; then
-            echo "Assembling site from base64 chunks..."
-            cat chunks/part-*.b64 | tr -d '\n' | base64 -d > /tmp/site.tar.gz
-            tar -xzf /tmp/site.tar.gz -C _site
-            expected=$(awk -F= '/gzip_sha256/{print $2}' chunks/MANIFEST.txt)
-            actual=$(sha256sum /tmp/site.tar.gz | awk '{print $1}')
-            echo "expected=$expected actual=$actual"
-            test "$expected" = "$actual"
-          elif [ -d _next ] && [ -f index.html ]; then
-            rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='chunks' --exclude='site-encoded' --exclude='assets' ./ _site/
-          else
-            echo "No site payload found" >&2
-            exit 1
-          fi
+          rsync -a app/out/ _site/
           touch _site/.nojekyll
-          test -f _site/index.html
-          test -d _site/_next
-          grep -q "Treino Live" _site/index.html
-          grep -q "treino-plus-preview/_next" _site/index.html
-          wc -c _site/index.html
-          find _site -type f | wc -l
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
